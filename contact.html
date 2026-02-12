@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Form Hub</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;max-width:760px;margin:32px auto;padding:16px;color:#222}
+    form{display:grid;gap:12px}
+    label{font-weight:600}
+    input,textarea{padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px}
+    button{background:#0078d4;color:#fff;padding:10px 14px;border:none;border-radius:6px;cursor:pointer}
+    small{color:#666}
+  </style>
+</head>
+<body>
+  <h1>Contact us</h1>
+  <p>Fill the form below and attach any document (any file type allowed). You'll receive a copy by email, and the admin will get the submission.</p>
+
+  <form action="send_contact.php" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="name">Your name</label><br>
+      <input id="name" name="name" type="text" required maxlength="120">
+    </div>
+
+    <div>
+      <label for="email">Your email</label><br>
+      <input id="email" name="email" type="email" required maxlength="200">
+    </div>
+
+    <div>
+      <label for="subject">Subject</label><br>
+      <input id="subject" name="subject" type="text" required maxlength="200">
+    </div>
+
+    <div>
+      <label for="message">Message</label><br>
+      <textarea id="message" name="message" rows="6" required></textarea>
+    </div>
+
+    <div>
+      <label for="attachment">Attach a file (any type)</label><br>
+      <input id="attachment" name="attachment" type="file" accept="*/*">
+      <div><small>Allowed: any file extension. Max recommended size ~10MB (server limit applies).</small></div>
+    </div>
+
+    <div>
+      <button type="submit">Send message</button>
+    </div>
+  </form>
+
+  <hr>
+  <small>Admin email: <code>mkcmukesh@hellob2c.com</code></small>
+</body>
+</html>
