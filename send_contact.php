@@ -50,7 +50,16 @@ if (!empty($_FILES['attachment']) && $_FILES['attachment']['error'] !== UPLOAD_E
     }
 
     $attachmentName = basename($f['name']);
-    $attachmentType = mime_content_type($f['tmp_name']) ?: 'application/octet-stream';
+    // determine mime type safely (use finfo if available, fall back to mime_content_type, otherwise default)
+    if (function_exists('finfo_open')) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $attachmentType = finfo_file($finfo, $f['tmp_name']) ?: 'application/octet-stream';
+        finfo_close($finfo);
+    } elseif (function_exists('mime_content_type')) {
+        $attachmentType = mime_content_type($f['tmp_name']) ?: 'application/octet-stream';
+    } else {
+        $attachmentType = 'application/octet-stream';
+    }
     $attachmentContent = file_get_contents($f['tmp_name']);
     $hasAttachment = $attachmentContent !== false;
 }

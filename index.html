@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Form Hub — Index</title>
+  <style>
+    body{font-family:Inter,Segoe UI,Arial,sans-serif;max-width:900px;margin:36px auto;padding:20px;color:#222}
+    header{display:flex;align-items:center;gap:12px}
+    h1{margin:0;font-size:1.6rem}
+    ul{padding-left:1.2rem}
+    .card{border:1px solid #e6e6e6;padding:14px;border-radius:8px;margin:12px 0;background:#fbfbfc}
+    a{color:#0066cc;text-decoration:none}
+    a:hover{text-decoration:underline}
+    small{color:#666}
+    .meta{font-size:0.9rem;color:#555;margin-top:6px}
+    footer{margin-top:28px;color:#666;font-size:0.9rem}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Form Hub — Available forms</h1>
+  </header>
+
+  <p>Quick index of forms and related endpoints in this project.</p>
+
+  <section class="card">
+    <h2>Contact form</h2>
+    <p>Primary contact form where users can send a message and attach a file.</p>
+    <ul>
+      <li><strong>Form page:</strong> <a href="contact.html">`contact.html`</a> — form UI (fields, file upload)</li>
+      <li><strong>Server handler:</strong> <a href="send_contact.php">`send_contact.php`</a> — processes the form submission</li>
+      <li><strong>Success page:</strong> <a href="thankyou.html">`thankyou.html`</a> — shown after successful submit</li>
+    </ul>
+    <div class="meta">Notes: the form posts to <code>send_contact.php</code> with multipart/form-data (file upload enabled).</div>
+  </section>
+
+  <footer>
+    <div>Open the form in your browser: <code>http://localhost/Form-Hub/PHP-Forms/index.html</code></div>
+    <div style="margin-top:6px"><small>Last updated: 2026-02-13</small></div>
+  </footer>
+</body>
+</html>
