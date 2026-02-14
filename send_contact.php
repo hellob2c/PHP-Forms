@@ -1,4 +1,8 @@
 <?php
+// Enable error reporting for debugging (remove in production)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // send_contact.php — processes contact form, attaches uploaded file, and emails both admin and the sender.
 // Admin email:
 $adminEmail = 'mkcmukesh@hellob2c.com';
