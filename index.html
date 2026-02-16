@@ -69,7 +69,7 @@
   </div>
 
   <!-- Header -->
-  <header id="header" class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+  <header id="header" class=" sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
     <!-- NOTE: you had duplicate Google font links here; kept to avoid deletion request -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,11 +121,185 @@
   </header>
 
   <!-- Hero -->
-  <section id="home" class="relative">
+  <section id="home" class="hidden relative">
     <div class="hero-bg" style="background-image:url('assets/images/property-2.jpg')"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/35 to-black/10"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 py-14 md:py-20 grid lg:grid-cols-2 gap-10 items-center">
+      <div class="reveal">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Trusted Property Consulting<br class="hidden sm:block" />
+          & Documentation Services1
+        </h1>
+        <p class="mt-5 text-white/90 text-lg max-w-xl">
+          Your Trusted Real Estate Partner in Gurgaon & Beyond
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#contact"
+            class="rounded-lg bg-white text-[#DE0000] px-5 py-3 font-semibold hover:bg-white/90 transition">Get in
+            Touch</a>
+          <a href="#services"
+            class="rounded-lg border border-white/40 px-5 py-3 font-semibold text-white hover:bg-white/10 transition">
+            Explore Services
+          </a>
+        </div>
+
+        <div class="mt-9 grid grid-cols-3 gap-4 max-w-lg">
+          <div class="rounded-xl bg-white/10 border border-white/15 p-4">
+            <div class="text-white font-extrabold text-2xl"><span data-counter="9">0</span>+</div>
+            <div class="text-white/80 text-sm mt-1">Years Experience</div>
+          </div>
+          <div class="rounded-xl bg-white/10 border border-white/15 p-4">
+            <div class="text-white font-extrabold text-2xl"><span data-counter="1200">0</span>+</div>
+            <div class="text-white/80 text-sm mt-1">Cases Handled</div>
+          </div>
+          <div class="rounded-xl bg-white/10 border border-white/15 p-4">
+            <div class="text-white font-extrabold text-2xl"><span data-counter="4">0</span>.9</div>
+            <div class="text-white/80 text-sm mt-1">Client Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero side card -->
+      <div class="reveal">
+        <div class="rounded-2xl bg-white/95 shadow-xl border border-white/40 overflow-hidden">
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h2 class="text-xl font-bold text-slate-900">Get a Free Consultation</h2>
+                <p class="text-sm text-slate-600 mt-1">Share your requirement — we’ll call you back.</p>
+              </div>
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-[#DE0000]/10 px-3 py-1 text-xs font-semibold text-[#DE0000]">
+                <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Available Today
+              </span>
+            </div>
+
+            <!-- UPDATED: action + method + enctype + submit button type -->
+            <form id="miniForm" class="mt-5 grid gap-3" action="api/submit.php" method="POST"
+              enctype="multipart/form-data">
+
+              <div class="grid sm:grid-cols-2 gap-3">
+                <input class="input" name="name" placeholder="Your Name" required />
+                <input class="input" name="phone" placeholder="Phone Number" required />
+              </div>
+
+              <input class="input" type="email" name="email" placeholder="Email (optional)" />
+              <select class="input" name="service" required>
+                <option value="">Select Service</option>
+                <option>Property Sale / Purchase</option>
+                <option>Rent / Leasing</option>
+                <option>Property Documentation</option>
+                <option>Legal Due Diligence</option>
+              </select>
+
+              <button type="submit"
+                class="rounded-lg bg-[#DE0000] text-white px-5 py-3 font-semibold hover:bg-[#083055] transition">
+                Request Callback
+              </button>
+
+              <p class="text-xs text-slate-500">By submitting, you agree to be contacted by S&Y Property Consultants.
+              </p>
+            </form>
+          </div>
+
+
+
+          <!-- <div class="bg-slate-50 border-t border-slate-200 px-6 py-4 flex items-center justify-between">
+            <div class="text-sm text-slate-600">Prefer WhatsApp?</div>
+            <a class="text-sm font-semibold text-[#25D366] hover:underline inline-flex items-center gap-1"
+              href="https://wa.me/917840071400" target="_blank" rel="noreferrer">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.19-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24M8.53 7.33c-.19-.43-.43-.43-.63-.43-.16 0-.35 0-.54.2-.19.21-.73.71-.73 1.73s.75 2 1.91 4.5c.52 1.1 1.89 3.97 4.58 4.77 2.69.8 2.69.53 3.19.49.49-.04 1.58-.65 1.8-1.28.22-.63.22-1.17.15-1.28-.07-.11-.26-.18-.54-.32s-1.64-.81-1.89-.9-.43-.14-.62.14-.73.91-.9 1.1-.33.22-.61.08a7.86 7.86 0 0 1-2.31-1.42 8.65 8.65 0 0 1-1.6-1.98c-.17-.29-.02-.44.12-.58.13-.13.28-.34.42-.51.14-.17.19-.29.28-.48.09-.18.05-.34-.02-.48s-.63-1.52-.86-2.08" />
+              </svg>
+              Chat Now
+            </a>
+          </div> -->
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================== -->
+
+
+
+
+
+  <!-- -------------------------------------------- -->
+
+
+
+
+
+
+  <section id="parallax-section" class="relative w-full overflow-hidden" style="
+    /* ================= SECTION CONTROL ================= */
+    --section-height: 600px;      /* auto | 600px | 80vh | 100vh */
+    --section-padding: 80px;     /* equal top & bottom */
+
+    min-height: var(--section-height);
+    padding-top: var(--section-padding);
+padding-bottom: calc(var(--section-padding) + 130px);
+
+
+    /* ================= PRIMARY BACKGROUND ================= */
+    /* --bg-image: url('https://static.vecteezy.com/system/resources/previews/070/068/863/large_2x/man-reading-papers-at-desk-with-stacks-of-papers-free-photo.jpg'); */
+    
+    --bg-image: url('assets/images/property-2.jpg');
+
+    --bg-pos-x: center;
+    --bg-pos-y: top;
+    --bg-size: cover;
+    --bg-repeat: no-repeat;
+
+    --parallax-speed: 0.6;
+
+    /* ================= SECONDARY IMAGE (DECORATIVE) ================= */
+    --secondary-image: url('assets/images/Transparnt-2.png');
+    --secondary-size: 400px;         /* cover | contain | 300px */
+    --secondary-pos: right bottom;   /* top right | center | etc */
+    --secondary-repeat: no-repeat;
+    --secondary-opacity: 1.8;
+    --secondary-blend: normal;       /* normal | overlay | multiply | soft-light */
+
+    /* ================= TRANSPARENT PNG/SVG PATTERN ================= */
+    --overlay-image: url('assets/images/partners1.png');
+    --overlay-size: contain;
+    --overlay-pos: right;
+    --overlay-repeat: no-repeat;
+    --overlay-opacity: 1.0;
+
+        /* --parallax-speed: 0.9; */
+
+    /* ================= GRADIENT ================= */
+    --grad-dir: to right;
+    --grad-1: rgba(0,0,0,0.75);
+    --grad-2: rgba(0,0,0,0.25);
+  ">
+
+    <!-- Primary Parallax Background -->
+    <div class="parallax-bg absolute inset-0 z-0"></div>
+
+    <!-- Secondary Decorative Image -->
+    <div class="secondary-bg absolute inset-0 pointer-events-none z-5"></div>
+
+    <!-- Transparent Pattern Image -->
+    <div class="overlay-image absolute inset-0 pointer-events-none z-10"></div>
+
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 pointer-events-none z-20"
+      style="background: linear-gradient(var(--grad-dir), var(--grad-1), var(--grad-2));">
+    </div>
+
+
+
+    <div class="relative max-w-7xl mx-auto px-4 py-14 md:py-20 grid lg:grid-cols-2 gap-10 items-center z-30">
       <div class="reveal">
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
           Trusted Property Consulting<br class="hidden sm:block" />
@@ -223,11 +397,323 @@
         </div>
       </div>
     </div>
+
+    <!-- ================= BOTTOM EXPERTISE BAR (LIKE IMAGE) ================= -->
+    <div class="absolute left-0 right-0 bottom-0 z-40">
+      <div class="bg-black/55 backdrop-blur-md border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+
+          <!-- On md+ we use 5 columns so dividers are real columns -->
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-8 md:gap-0">
+
+            <!-- Residential -->
+            <div class="flex items-center gap-4 md:pr-8">
+              <div class="text-[#DE0000] text-3xl shrink-0">
+                <i class="fa-solid fa-house"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Residential</h3>
+                <p class="text-white/80 mt-1 text-sm leading-relaxed">
+                  Premium flats, residential plots, and independent builder floors in Gurgaon.
+                </p>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="hidden md:block mx-auto w-px bg-white/20"></div>
+
+            <!-- Strategic Land -->
+            <div class="flex items-center gap-4 md:px-8">
+              <div class="text-[#DE0000] text-3xl shrink-0">
+                <i class="fa-solid fa-tractor"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Strategic Land</h3>
+                <p class="text-white/80 mt-1 text-sm leading-relaxed">
+                  Agricultural land and luxury farmhouses in Manesar, Sohna, and Rewari.
+                </p>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="hidden md:block mx-auto w-px bg-white/20"></div>
+
+            <!-- Industrial & Logistics -->
+            <div class="flex items-center gap-4 md:pl-8">
+              <div class="text-[#DE0000] text-3xl shrink-0">
+                <i class="fa-solid fa-warehouse"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Industrial &amp; Logistics</h3>
+                <p class="text-white/80 mt-1 text-sm leading-relaxed">
+                  High-capacity warehouse properties in Jhajjar, Rohtak, and Badli.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Section Heading -->
+      <!-- <div class="flex items-center gap-3 mb-10">
+      <span class="text-red-600 text-2xl">
+        <i class="fa-solid fa-building"></i>
+      </span>
+      <h2 class="text-3xl font-extrabold text-red-600">
+        Our Areas of Expertise
+      </h2>
+    </div> -->
+
+
+
+    </div>
+
+
+
+
+    <!-- Styles -->
+    <style>
+      .parallax-bg {
+        background-image: var(--bg-image);
+        background-position: var(--bg-pos-x) var(--bg-pos-y);
+        background-size: var(--bg-size);
+        background-repeat: var(--bg-repeat);
+        transform: translateY(0) scale(1.1);
+        will-change: transform;
+      }
+
+      .secondary-bg {
+        background-image: var(--secondary-image);
+        background-size: var(--secondary-size);
+        background-position: var(--secondary-pos);
+        background-repeat: var(--secondary-repeat);
+        opacity: var(--secondary-opacity);
+        mix-blend-mode: var(--secondary-blend);
+      }
+
+      .overlay-image {
+        background-image: var(--overlay-image);
+        background-size: var(--overlay-size);
+        background-position: var(--overlay-pos);
+        background-repeat: var(--overlay-repeat);
+        opacity: var(--overlay-opacity);
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(25px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-up.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .fade-up {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+
+    <!-- Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        const section = document.getElementById("parallax-section");
+        const bg = section.querySelector(".parallax-bg");
+
+        const speed = parseFloat(
+          getComputedStyle(section).getPropertyValue("--parallax-speed")
+        ) || 0.3;
+
+        window.addEventListener("scroll", function () {
+          const rect = section.getBoundingClientRect();
+          const offset = -rect.top;
+
+          bg.style.transform =
+            `translateY(${offset * speed}px) scale(1.1)`;
+        }, { passive: true });
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+            }
+          });
+        }, { threshold: 0.3 });
+
+        section.querySelectorAll(".fade-up").forEach(el => {
+          observer.observe(el);
+        });
+
+      });
+    </script>
+
   </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- About Content Area: Text (Left) + Video (Right) -->
+  <section class="w-full py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <!-- LEFT: TEXT -->
+        <div class="about-left rounded-2xl p-8 bg-white">
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4">
+            Your Trusted Real Estate Partner in Gurgaon &amp; Beyond
+          </h3>
+
+          <p class="text-base sm:text-lg text-slate-700 leading-relaxed">
+            <span class="font-semibold text-slate-900">At S &amp; Y Consultants,</span>
+            we don’t just close deals; we build long-term relationships. Whether you are looking for a dream home,
+            a strategic commercial space, or high-yield agricultural land, we provide expert guidance backed by
+            transparency and legal integrity.
+          </p>
+
+          <div>
+            
+          <div class="w-full bg-white rounded-xl shadow-sm px-6 py-5">
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+
+    <!-- Left Column (Title) -->
+    <div class="md:col-span-1">
+      <div class="font-semibold text-slate-900 flex items-center gap-2">
+        <i class="fa-regular fa-clock text-[#DE0000]"></i>
+        Business Hours
+      </div>
+    </div>
+
+    <!-- Right Column (Details) -->
+    <div class="md:col-span-2 space-y-3">
+
+      <div class="flex justify-between items-center">
+        <span class="text-slate-600">Mon – Sat</span>
+        <span class="px-3 py-1 bg-slate-100 rounded-full font-medium text-slate-800">
+          10:00 AM – 7:00 PM
+        </span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-slate-600">Sunday</span>
+        <span class="px-3 py-1 bg-[#DE0000]/10 text-[#DE0000] rounded-full font-medium">
+          On Call
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+          </div>
+
+
+
+
+
+        </div>
+
+        <!-- RIGHT: VIDEO -->
+        <div class="about-right rounded-2xl shadow-md overflow-hidden bg-white">
+          <div class="relative aspect-video">
+            <video class="absolute inset-0 w-full h-full object-cover" src="assets/images/about.mp4" controls muted
+              playsinline preload="metadata"></video>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Animation Styles -->
+    <style>
+      .about-left,
+      .about-right {
+        opacity: 0;
+        transform: translateX(40px);
+        transition: all 0.9s ease;
+      }
+
+      .about-left {
+        transform: translateX(-60px);
+      }
+
+      .about-right {
+        transform: translateX(60px);
+      }
+
+      .about-left.show,
+      .about-right.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+        .about-left,
+        .about-right {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+
+    <!-- Animation Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const elements = document.querySelectorAll(".about-left, .about-right");
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+            }
+          });
+        }, { threshold: 0.3 });
+
+        elements.forEach(el => observer.observe(el));
+      });
+    </script>
+  </section>
+
+
+
+  <!-- --------------------------------------------- -->
+
+
+
 
   <!-- About Section -->
   <section id="about"
-    class="py-20 bg-gradient-to-br from-white via-slate-50 to-slate-200 border-b border-slate-200 relative overflow-hidden">
+    class="hidden py-20 bg-gradient-to-br from-white via-slate-50 to-slate-200 border-b border-slate-200 relative overflow-hidden">
     <!-- Decorative SVG background shapes -->
     <svg class="absolute top-0 left-0 w-64 h-64 opacity-10 text-[#DE0000] -z-10" viewBox="0 0 400 400" fill="none">
       <circle cx="200" cy="200" r="200" fill="currentColor" />
@@ -266,6 +752,8 @@
             class="fa-solid fa-file-signature"></i> The "Stress-Free" Documentation Service</h3>
         <p>We understand that paperwork is often the most daunting part of real estate. That’s why we’ve revolutionized
           the process to value your time and peace of mind.</p>
+
+          
         <ul class="grid gap-2 md:grid-cols-2 list-none pl-0">
           <li class="flex items-start gap-2"><span class="text-[#083055]"><i class="fa-solid fa-user-shield"></i></span>
             <span><strong>Vetted by Experts:</strong> Every document is meticulously reviewed and legally drafted by our
@@ -288,6 +776,9 @@
               comfortable lounge and ample parking at our Sector 10, Gurgaon facility.</span>
           </li>
         </ul>
+
+
+
         <p class="mt-6 text-base text-slate-700">This specialized documentation service is currently available in <span
             class="font-semibold">Gurgaon, Manesar, Farrukhnagar, Badshahpur, and Rewari</span>.</p>
       </div>
@@ -332,102 +823,153 @@
   <section id="services" class="py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-4">
 
-      <div class="mt-0 grid md:grid-cols-2 gap-7">
 
-        <!-- Card: Vetted by Experts -->
-        <article class="card reveal" data-service="vetted">
-          <div class="card-icon">
-            <span class="text-[#083055]">
-              <i class="fa-solid fa-user-shield fa-2x"></i>
-            </span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold">Vetted by Experts</h3>
-            <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
-              <li>Every document is meticulously reviewed and legally drafted by our in-house legal team.</li>
-            </ul>
-            <div class="mt-4 flex items-center gap-3">
-              <a class="btn-call" href="tel:+917840071400">Call Now</a>
-            </div>
-          </div>
-        </article>
+<div class="mt-8">
 
-        <!-- Card: Concierge Assistance -->
-        <article class="card reveal" data-service="concierge">
-          <div class="card-icon">
-            <span class="text-[#083055]">
-              <i class="fa-solid fa-handshake-angle fa-2x"></i>
-            </span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold">Concierge Assistance</h3>
-            <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
-              <li>On your scheduled day at the Tehsil or Court, our dedicated team member will meet you on-site with all
-                documents prepared. No waiting, no confusion.</li>
-            </ul>
-            <div class="mt-4 flex items-center gap-3">
-              <a class="btn-call" href="tel:+917840071400">Call Now</a>
-            </div>
-          </div>
-        </article>
 
-        <!-- Card: Phone Consultations -->
-        <article class="card reveal" data-service="phone">
-          <div class="card-icon">
-            <span class="text-[#083055]">
-              <i class="fa-solid fa-phone fa-2x"></i>
-            </span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold">Phone Consultations</h3>
-            <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
-              <li>Our experts are available via phone to answer any technical or legal queries, saving you unnecessary
-                trips to the office.</li>
-            </ul>
-            <div class="mt-4 flex items-center gap-3">
-              <a class="btn-call" href="tel:+917840071400">Call Now</a>
-            </div>
-          </div>
-        </article>
+<!-- Cards with animation & hover effect -->
+<style>
+  /* tiny, dependency-free entrance animation (staggered via delay classes) */
+  .fade-up { opacity: 0; transform: translateY(12px); animation: fadeUp .56s cubic-bezier(.2,.9,.2,1) forwards; }
+  .fade-up.delay-1 { animation-delay: .04s; }
+  .fade-up.delay-2 { animation-delay: .08s; }
+  .fade-up.delay-3 { animation-delay: .12s; }
+  .fade-up.delay-4 { animation-delay: .16s; }
+  .fade-up.delay-5 { animation-delay: .20s; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 
-        <!-- Card: Flexible Delivery -->
-        <article class="card reveal" data-service="delivery">
-          <div class="card-icon">
-            <span class="text-[#083055]">
-              <i class="fa-solid fa-truck fa-2x"></i>
-            </span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold">Flexible Delivery</h3>
-            <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
-              <li>Once finalized, documents can be collected from our Sector 10 office or delivered directly to your
-                doorstep by our secure courier team.</li>
-            </ul>
-            <div class="mt-4 flex items-center gap-3">
-              <a class="btn-call" href="tel:+917840071400">Call Now</a>
-            </div>
-          </div>
-        </article>
+<div class="mt-8">
+  <div class="grid gap-6 md:grid-cols-2">
 
-        <!-- Card: Comfort & Convenience -->
-        <article class="card reveal" data-service="comfort">
-          <div class="card-icon">
-            <span class="text-[#083055]">
-              <i class="fa-solid fa-mug-hot fa-2x"></i>
-            </span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold">Comfort & Convenience</h3>
-            <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
-              <li>If you arrive early from out of town, enjoy our comfortable lounge and ample parking at our Sector 10,
-                Gurgaon facility.</li>
-            </ul>
-            <div class="mt-4 flex items-center gap-3">
-              <a class="btn-call" href="tel:+917840071400">Call Now</a>
-            </div>
-          </div>
-        </article>
+    <!-- Card 1 -->
+    <article
+      class="fade-up delay-1 bg-white/80 border border-slate-200 rounded-2xl p-6 flex gap-4 items-start 
+             transform transition will-change-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:scale-105
+             focus-within:shadow-xl outline-none"
+      tabindex="0" role="region" aria-labelledby="feat-1-title"
+    >
+      <div class="text-slate-700 text-2xl mt-1 shrink-0">
+        <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
       </div>
+
+      <div class="text-base text-slate-700 leading-relaxed">
+        <h3 id="feat-1-title" class="text-slate-900 font-semibold mb-1">Vetted by Experts</h3>
+        <p>Every document is meticulously reviewed and legally drafted by our in-house legal team.</p>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article
+      class="fade-up delay-2 bg-white/80 border border-slate-200 rounded-2xl p-6 flex gap-4 items-start 
+             transform transition will-change-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:scale-105
+             focus-within:shadow-xl outline-none"
+      tabindex="0" role="region" aria-labelledby="feat-2-title"
+    >
+      <div class="text-slate-700 text-2xl mt-1 shrink-0">
+        <i class="fa-solid fa-handshake-angle" aria-hidden="true"></i>
+      </div>
+
+      <div class="text-base text-slate-700 leading-relaxed">
+        <h3 id="feat-2-title" class="text-slate-900 font-semibold mb-1">Concierge Assistance</h3>
+        <p>On your scheduled day at the Tehsil or Court, our team will meet you on-site with all documents prepared — no waiting, no confusion.</p>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article
+      class="fade-up delay-3 bg-white/80 border border-slate-200 rounded-2xl p-6 flex gap-4 items-start 
+             transform transition will-change-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:scale-105
+             focus-within:shadow-xl outline-none"
+      tabindex="0" role="region" aria-labelledby="feat-3-title"
+    >
+      <div class="text-slate-700 text-2xl mt-1 shrink-0">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+      </div>
+
+      <div class="text-base text-slate-700 leading-relaxed">
+        <h3 id="feat-3-title" class="text-slate-900 font-semibold mb-1">Phone Consultations</h3>
+        <p>Our experts are available via phone to answer technical or legal queries, saving you unnecessary office visits.</p>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article
+      class="fade-up delay-4 bg-white/80 border border-slate-200 rounded-2xl p-6 flex gap-4 items-start 
+             transform transition will-change-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:scale-105
+             focus-within:shadow-xl outline-none"
+      tabindex="0" role="region" aria-labelledby="feat-4-title"
+    >
+      <div class="text-slate-700 text-2xl mt-1 shrink-0">
+        <i class="fa-solid fa-truck" aria-hidden="true"></i>
+      </div>
+
+      <div class="text-base text-slate-700 leading-relaxed">
+        <h3 id="feat-4-title" class="text-slate-900 font-semibold mb-1">Flexible Delivery</h3>
+        <p>Finalized documents can be collected from our Sector 10 office or delivered securely to your doorstep.</p>
+      </div>
+    </article>
+
+    <!-- Card 5 (full width) -->
+    <article
+      class="fade-up delay-5 md:col-span-2 bg-white/80 border border-slate-200 rounded-2xl p-6 flex gap-4 items-start 
+             transform transition will-change-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:scale-105
+             focus-within:shadow-xl outline-none"
+      tabindex="0" role="region" aria-labelledby="feat-5-title"
+    >
+      <div class="text-slate-700 text-2xl mt-1 shrink-0">
+        <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+      </div>
+
+      <div class="text-base text-slate-700 leading-relaxed">
+        <h3 id="feat-5-title" class="text-slate-900 font-semibold mb-1">Comfort & Convenience</h3>
+        <p>If you arrive early from out of town, enjoy our comfortable lounge and ample parking at our Sector 10, Gurugram facility.</p>
+      </div>
+    </article>
+
+  </div>
+
+
+  <!-- Highlighted Common Call Section -->
+  <div class="mt-12">
+    <div class="max-w-3xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center shadow-sm">
+      
+      <p class="text-[#DE0000] text-base leading-relaxed font-medium">
+        For professional property documentation and on-site assistance, connect with our team today.
+      </p>
+
+      <p class="mt-3 text-slate-600 text-base leading-relaxed">
+        We ensure a seamless, transparent and legally secure experience from start to finish.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Optional: small script to re-run animations when cards scroll into view
+     (useful if this section is lower on the page). Remove if not needed. -->
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    const nodes = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view'); // no-op, animation already runs; this line kept for extensibility
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    nodes.forEach(n => io.observe(n));
+  })();
+</script>
+
+
+
+
+</div>
 
 
 
@@ -435,7 +977,7 @@
   </section>
 
   <!-- Team -->
-  <section id="team" class="py-16 md:py-20 bg-white border-y border-slate-200">
+  <section id="team" class="py-16 bg-white md:py-20">
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center reveal">
         <h2 class="text-3xl md:text-4xl font-extrabold text-[#DE0000]">Meet Our Team</h2>
@@ -489,7 +1031,7 @@
 
 
 
-      
+
 
 
 
@@ -500,311 +1042,197 @@
   </section>
 
 
-<!-- Client Testimonials Section -->
-<section class="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
+  <!-- Client Testimonials Section -->
+  <section class="py-20 bg-slate-200 relative overflow-hidden">
 
-  <!-- Decorative elements -->
-  <div class="absolute top-0 right-0 w-96 h-96 bg-[#DE0000]/5 rounded-full -mr-48 -mt-48"></div>
-  <div class="absolute bottom-0 left-0 w-80 h-80 bg-[#083055]/5 rounded-full -ml-40 -mb-40"></div>
+    <!-- Decorative elements -->
+    <!-- <div class="absolute top-0 right-0 w-96 h-96 bg-[#DE0000]/5 rounded-full -mr-48 -mt-48"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-[#083055]/5 rounded-full -ml-40 -mb-40"></div> -->
 
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
 
-    <!-- Section Header -->
-    <div class="text-center mb-16">
-      <span class="inline-block px-4 py-2 rounded-full bg-[#DE0000]/10 text-[#DE0000] text-sm font-semibold mb-4">
-        CLIENT TESTIMONIALS
-      </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
-        Trusted by Property Buyers & Sellers
-      </h2>
-      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-        Real experiences from real clients who found success with our expert guidance and support
-      </p>
-    </div>
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <!-- <span class="inline-block px-4 py-2 rounded-full bg-[#DE0000]/10 text-[#DE0000] text-sm font-semibold mb-4">
+          CLIENT TESTIMONIALS
+        </span> -->
+       
 
-    <!-- Swiper -->
-    <div class="swiper testimonialsSwiper">
-      <div class="swiper-wrapper">
-
-        <!-- Slide 1 -->
-        <div class="swiper-slide">
-          <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-[#DE0000] h-full">
-            <div class="p-8">
-              <div class="flex gap-1 mb-4">
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-              </div>
-              <p class="text-slate-700 text-sm mb-6">
-                "Exceptional service! The documentation team explained every clause and made the entire registration process seamless."
-              </p>
-              <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
-                <div class="h-14 w-14 rounded-full bg-[#DE0000] text-white flex items-center justify-center font-bold">RK</div>
-                <div>
-                  <h4 class="font-bold text-slate-900">Rajesh Kumar</h4>
-                  <p class="text-xs text-slate-500">Home Buyer • Gurugram</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="swiper-slide">
-          <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-[#083055] h-full">
-            <div class="p-8">
-              <div class="flex gap-1 mb-4">
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-              </div>
-              <p class="text-slate-700 text-sm mb-6">
-                "Transparent pricing and quick turnaround. Highly professional documentation service."
-              </p>
-              <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
-                <div class="h-14 w-14 rounded-full bg-[#083055] text-white flex items-center justify-center font-bold">PS</div>
-                <div>
-                  <h4 class="font-bold text-slate-900">Priya Singh</h4>
-                  <p class="text-xs text-slate-500">Investor • Delhi NCR</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="swiper-slide">
-          <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-emerald-500 h-full">
-            <div class="p-8">
-              <div class="flex gap-1 mb-4">
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-              </div>
-              <p class="text-slate-700 text-sm mb-6">
-                "They identified a critical issue in my property papers and saved me from major legal trouble."
-              </p>
-              <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
-                <div class="h-14 w-14 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">AP</div>
-                <div>
-                  <h4 class="font-bold text-slate-900">Amit Patel</h4>
-                  <p class="text-xs text-slate-500">Landlord • Gurugram</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="swiper-slide">
-          <div class="bg-white rounded-2xl shadow-md border-l-4 border-purple-500 h-full">
-            <div class="p-8">
-              <div class="flex gap-1 mb-4">
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-                <i class="fa-solid fa-star text-amber-400"></i>
-              </div>
-              <p class="text-slate-700 text-sm mb-6">
-                "Fast, responsive and highly knowledgeable team. Excellent support throughout."
-              </p>
-              <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
-                <div class="h-14 w-14 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold">SM</div>
-                <div>
-                  <h4 class="font-bold text-slate-900">Sanjay Mehta</h4>
-                  <p class="text-xs text-slate-500">Business Owner • Noida</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+         <h2 class="text-3xl md:text-4xl font-extrabold text-[#DE0000]">Trusted by Property Buyers & Sellers</h2>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          Real experiences from real clients who found success with our expert guidance.
+        </p>
       </div>
 
-      <!-- Navigation -->
-      <div class="flex items-center justify-center gap-4 mt-10">
-        <button class="testimonials-prev w-10 h-10 rounded-full bg-white shadow flex items-center justify-center">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
+      <!-- Swiper -->
 
-        <div class="swiper-pagination !static"></div>
 
-        <button class="testimonials-next w-10 h-10 rounded-full bg-white shadow flex items-center justify-center">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+<div class="swiper testimonialsSwiper">
+  <div class="swiper-wrapper items-stretch">
+
+    <!-- Slide 1 -->
+    <div class="swiper-slide h-auto flex">
+      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden
+                  border border-slate-200 border-l-4 border-l-slate-300 h-full flex flex-col w-full">
+        <div class="p-8 flex flex-col h-full">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+
+          <p class="text-slate-600 text-sm mb-6 flex-grow">
+            "Exceptional service! The documentation team explained every clause and made the entire registration process seamless."
+          </p>
+
+          <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+            <div class="h-14 w-14 rounded-full bg-slate-700 text-white flex items-center justify-center font-semibold">
+              RK
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900">Rajesh Kumar</h4>
+              <p class="text-xs text-slate-500">Home Buyer • Gurugram</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="swiper-slide h-auto flex">
+      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden
+                  border border-slate-200 border-l-4 border-l-slate-300 h-full flex flex-col w-full">
+        <div class="p-8 flex flex-col h-full">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+
+          <p class="text-slate-600 text-sm mb-6 flex-grow">
+            "Transparent pricing and quick turnaround. Highly professional documentation service."
+          </p>
+
+          <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+            <div class="h-14 w-14 rounded-full bg-slate-700 text-white flex items-center justify-center font-semibold">
+              PS
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900">Priya Singh</h4>
+              <p class="text-xs text-slate-500">Investor • Delhi NCR</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="swiper-slide h-auto flex">
+      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden
+                  border border-slate-200 border-l-4 border-l-slate-300 h-full flex flex-col w-full">
+        <div class="p-8 flex flex-col h-full">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+
+          <p class="text-slate-600 text-sm mb-6 flex-grow">
+            "They identified a critical issue in my property papers and saved me from major legal trouble."
+          </p>
+
+          <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+            <div class="h-14 w-14 rounded-full bg-slate-700 text-white flex items-center justify-center font-semibold">
+              AP
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900">Amit Patel</h4>
+              <p class="text-xs text-slate-500">Landlord • Gurugram</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="swiper-slide h-auto flex">
+      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden
+                  border border-slate-200 border-l-4 border-l-slate-300 h-full flex flex-col w-full">
+        <div class="p-8 flex flex-col h-full">
+          <div class="flex gap-1 mb-4 text-amber-400 text-sm">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+
+          <p class="text-slate-600 text-sm mb-6 flex-grow">
+            "Fast, responsive and highly knowledgeable team. Excellent support throughout."
+          </p>
+
+          <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+            <div class="h-14 w-14 rounded-full bg-slate-700 text-white flex items-center justify-center font-semibold">
+              SM
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-900">Sanjay Mehta</h4>
+              <p class="text-xs text-slate-500">Business Owner • Noida</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
-</section>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Navigation -->
+  <div class="flex items-center justify-center gap-4 mt-10">
+    <button class="testimonials-prev w-10 h-10 rounded-full bg-white shadow-sm hover:shadow-md transition
+                   flex items-center justify-center">
+      <i class="fa-solid fa-chevron-left text-slate-600"></i>
+    </button>
 
-<script>
-  new Swiper(".testimonialsSwiper", {
-    loop: true,
-    spaceBetween: 24,
-    slidesPerView: 1,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".testimonials-next",
-      prevEl: ".testimonials-prev",
-    },
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
-    },
-  });
-</script>
+    <div class="swiper-pagination !static"></div>
 
+    <button class="testimonials-next w-10 h-10 rounded-full bg-white shadow-sm hover:shadow-md transition
+                   flex items-center justify-center">
+      <i class="fa-solid fa-chevron-right text-slate-600"></i>
+    </button>
+  </div>
+</div>
+    
 
-
-
-  <!-- Why Choose (parallax version) -->
-  <section id="why" class="py-16 md:py-20 relative overflow-hidden hidden">
-    <div class="why-bg absolute inset-0 pointer-events-none">
-      <div class="why-bg-image absolute inset-0 opacity-[0.08]"></div>
-      <div class="why-bg-fade absolute inset-0"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start relative">
-      <div class="reveal">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-[#DE0000]">Why Choose Us</h2>
-        <p class="mt-3 text-[#ffffff]">We combine practical property experience with legal clarity — so you can move
-          fast with confidence.</p>
-
-        <div class="mt-7 grid gap-4">
-          <div class="why-item">
-            <div class="why-icon">🏠</div>
-            <div>
-              <div class="font-bold">End-to-End Property Solutions</div>
-              <div class="text-sm text-slate-600">From requirement to closing, we coordinate and guide at every step.
-              </div>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">📄</div>
-            <div>
-              <div class="font-bold">Expert Legal Documentation</div>
-              <div class="text-sm text-slate-600">Strong clauses, correct formats, and registration-ready paperwork.
-              </div>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">✅</div>
-            <div>
-              <div class="font-bold">Transparent & Trustworthy</div>
-              <div class="text-sm text-slate-600">Clear process updates and no hidden surprises.</div>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">👥</div>
-            <div>
-              <div class="font-bold">Experienced Professionals</div>
-              <div class="text-sm text-slate-600">Practical local knowledge for better decisions.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10">
-          <h3 class="text-lg font-bold   text-[#ffffff]     ">Quick FAQs</h3>
-          <div class="mt-3 grid gap-3">
-            <div class="faq">
-              <button class="faq-q" type="button">How fast can you prepare a rent agreement?<span
-                  class="faq-i">+</span></button>
-              <div class="faq-a">Typically within 24–48 hours after we receive required details and ID proofs.</div>
-            </div>
-            <div class="faq">
-              <button class="faq-q" type="button">Do you support registration and stamp duty guidance?<span
-                  class="faq-i">+</span></button>
-              <div class="faq-a">Yes. We guide stamp duty value, appointment booking, documents,
-                and the complete registration workflow.</div>
-            </div>
-            <div class="faq">
-              <button class="faq-q" type="button">Can I share documents online for verification?<span
-                  class="faq-i">+</span></button>
-              <div class="faq-a">Yes — upload documents securely via our Quick Enquiry form.
-                Our team reviews and responds promptly.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="reveal">
-        <div class="rounded-2xl bg-white shadow-lg border border-slate-200 overflow-hidden">
-          <div class="bg-[#1E2B3D] p-6 text-white">
-            <h3 class="text-2xl font-extrabold">Contact Us</h3>
-            <p class="text-white/85 text-sm mt-1">Send a message — we’ll respond quickly.</p>
-          </div>
-
-          <!-- UPDATED: action + method + button type -->
-          <form id="contactForm" class="p-6 grid gap-3 max-h-[500px] overflow-auto" action="api/submit.php"
-            method="POST" enctype="multipart/form-data">
-
-            <input class="input" name="name" placeholder="Your Name" required />
-            <div class="flex gap-1  flex-direction-row flex-wrap">
-              <input class="input flex" name="email" type="email" placeholder="Your Email" required />
-              <input class="input flex" name="phone" placeholder="Your Phone" required />
-            </div>
-            <textarea class="input min-h-[120px]" name="message" placeholder="Your Message" required></textarea>
-
-            <div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
-              <label class="text-sm font-semibold text-slate-800">Upload documents (optional)</label>
-              <input class="mt-2 block w-full text-sm" type="file" name="docs[]" multiple
-                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" />
-              <p class="text-xs text-slate-500 mt-2">Accepted: PDF, JPG/PNG, DOC/DOCX. Max 10MB total.</p>
-            </div>
-
-            <button type="submit"
-              class="rounded-lg bg-[#DE0000] hover:bg-[#083055] text-white font-extrabold py-3 transition flex items-center justify-center gap-2">
-              <span>Send Message</span>
-              <span class="hidden" id="contactSpinner">Sending…</span>
-            </button>
-
-            <div id="contactAlert" class="hidden rounded-xl p-4 text-sm"></div>
-          </form>
-        </div>
-
-        <!-- <div class="mt-6 rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
-          <h4 class="font-bold text-slate-900">Office Address</h4>
-          <p class="mt-2 text-sm text-slate-600">
-            DSS-6, HUDA Market, Sector 10<br /> 
-            Near Kadipur Chowk, Opp. Euro International School<br />
-            Sector 10, Gurugram
-          </p>
-          <div class="mt-4 flex flex-wrap gap-3">
-            <a class="btn-lite"
-              href="https://www.google.com/maps/search/?api=1&query=DSS-6%2C+HUDA+Market%2C+Sector+10%2C+Gurugram"
-              target="_blank" rel="noreferrer">Open in Maps</a>
-            <a class="btn-call" href="tel:+917840071400">Call Office</a>
-          </div>
-        </div> -->
-      </div>
     </div>
   </section>
 
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    new Swiper(".testimonialsSwiper", {
+      loop: true,
+      spaceBetween: 24,
+      slidesPerView: 1,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".testimonials-next",
+        prevEl: ".testimonials-prev",
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  </script>
+
+
+
+
+
   <!-- DUPLICATE WHY SECTION KEPT (NO DELETION) but ID changed to avoid conflict -->
-  <section id="why-2" class="py-16 md:py-20 ">
+  <section id="why-2" class="py-16 md:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
       <div class="reveal">
         <h2 class="text-3xl md:text-4xl font-extrabold text-[#DE0000]">Why Choose Us</h2>
-        <p class="mt-3 text-slate-600 text-[#ffffff]">We 1combine practical property experience with legal clarity — so
+        <p class="mt-3 text-slate-600">We combine practical property experience with legal clarity — so
           you can move
           fast with confidence.</p>
 
@@ -862,31 +1290,6 @@
 
 
 
-
-        <!-- <div class="mt-10">
-          <h3 class="text-lg font-bold text-slate-900">Quick FAQs</h3>
-          <div class="mt-3 grid gap-3">
-            <div class="faq">
-              <button class="faq-q" type="button">How fast can you prepare a rent agreement?<span
-                  class="faq-i">+</span></button>
-              <div class="faq-a">Typically within 24–48 hours after we receive required details and ID proofs.</div>
-            </div>
-            <div class="faq">
-              <button class="faq-q" type="button">Do you support registration and stamp duty guidance?<span
-                  class="faq-i">+</span></button>
-              <div class="faq-a">Yes. We guide stamp duty value, appointment booking, documents,
-                and the complete registration workflow.</div>
-            </div>
-            <div class="faq">
-              <button class="faq-q" type="button">Can I share documents online for verification?<span
-                  class="faq-i">+</span></button>
-              <div class="faq-a">Yes — upload documents securely via our Quick Enquiry form.
-                Our team reviews and responds promptly.</div>
-            </div>
-          </div>
-        </div> -->
-
-
       </div>
 
       <div class="reveal">
@@ -901,9 +1304,9 @@
             enctype="multipart/form-data">
 
             <input class="input" name="name" placeholder="Your Name" required />
-           
-              <input class="input" name="email" type="email" placeholder="Your Email" required />
-              <input class="input" name="phone" placeholder="Your Phone" required />
+
+            <input class="input" name="email" type="email" placeholder="Your Email" required />
+            <input class="input" name="phone" placeholder="Your Phone" required />
 
             <textarea class="input min-h-[120px]" name="message" placeholder="Your Message" required></textarea>
 
@@ -1016,7 +1419,7 @@
 
         <!-- CTA -->
         <div class="mt-6 text-right">
-                        <a class="btn-call" href="tel:+917840071400">Call Now if you have any queries</a>
+          <a class="btn-call" href="tel:+917840071400">Call Now if you have any queries</a>
 
           <!-- <a href="./faqs"
             class="inline-flex items-center gap-2 rounded-md bg-[#DE0000] px-4 py-2 text-sm font-semibold text-white hover:bg-[#083055]">
@@ -1081,141 +1484,141 @@
   </section>
 
 
-  <!-- Footer -->
 
-  <footer id="contact" class="bg-slate-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 py-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+  <!-- Footer -->
+<footer id="contact" class="bg-slate-900 text-white">
+  <!-- Top -->
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
 
       <!-- Brand / About -->
-      <div>
-        <div class="flex items-center gap-3">
-          <img src="assets/icons/SY Proprty Logo-Dark.svg" alt="Logo" class="h-11 w-11">
-          <div class="text-xl font-extrabold leading-tight">
-            S&Y Property Consultants
-            <span class="block text-xs text-slate-500 font-light">
+      <div class="lg:col-span-2 lg:pr-10">
+        <div class="flex items-start gap-3">
+          <img src="assets/icons/SY Proprty Logo-Dark.svg" alt="Logo" class="h-11 w-11 shrink-0" />
+          <div>
+            <div class="text-xl font-extrabold leading-tight">
+              S&Y Property Consultants
+            </div>
+            <span class="mt-1 block text-xs text-slate-400 font-light tracking-wide">
               Sale • Purchase • Rent • Documentation
             </span>
           </div>
         </div>
 
-        <p class="text-white/70 text-sm font-light mt-3 leading-relaxed">
+        <p class="mt-4 text-sm font-light leading-relaxed text-white/70">
           Property consulting & documentation services with a focus on
           transparency, speed and legal clarity.
         </p>
-
-        <!-- Social Icons -->
-        <div class="mt-4 flex items-center gap-3">
-          <a href="#" class="h-9 w-9 rounded-full border border-white/15 flex items-center justify-center
-                 transition-colors hover:bg-white/10 hover:text-[#de0000]">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
-          <a href="#" class="h-9 w-9 rounded-full border border-white/15 flex items-center justify-center
-                 transition-colors hover:bg-white/10 hover:text-[#de0000]">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
-          <a href="#" class="h-9 w-9 rounded-full border border-white/15 flex items-center justify-center
-                 transition-colors hover:bg-white/10 hover:text-[#de0000]">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-        </div>
       </div>
 
       <!-- Quick Links -->
       <div>
-        <div class="font-bold">Quick Links</div>
-        <div class="mt-3 grid gap-2 text-sm text-white/75 font-light">
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#services">
-            <i class="fa-solid fa-angle-right text-xs"></i> Services
-          </a>
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#team">
-            <i class="fa-solid fa-angle-right text-xs"></i> Our Team
-          </a>
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#why">
-            <i class="fa-solid fa-angle-right text-xs"></i> Why Choose Us
-          </a>
-          <!-- <button data-open-modal="enquiry" type="button"
-          class="flex items-center gap-2 text-left transition-colors hover:text-[#de0000]">
-          <i class="fa-solid fa-angle-right text-xs"></i> Quick Enquiry
-        </button> -->
-          <!-- <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#contact">
-          <i class="fa-solid fa-angle-right text-xs"></i> Contact
-        </a> -->
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#faq">
-            <i class="fa-solid fa-angle-right text-xs"></i> FAQs
-          </a>
-        </div>
+        <div class="text-sm font-semibold tracking-wide text-white/90">Quick Links</div>
+        <ul class="mt-4 space-y-2 text-sm font-light text-white/75">
+          <li>
+            <a class="group flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#services">
+              <i class="fa-solid fa-angle-right text-xs text-white/40 group-hover:text-[#de0000]"></i>
+              Services
+            </a>
+          </li>
+          <li>
+            <a class="group flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#team">
+              <i class="fa-solid fa-angle-right text-xs text-white/40 group-hover:text-[#de0000]"></i>
+              Our Team
+            </a>
+          </li>
+          <li>
+            <a class="group flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#why">
+              <i class="fa-solid fa-angle-right text-xs text-white/40 group-hover:text-[#de0000]"></i>
+              Why Choose Us
+            </a>
+          </li>
+          <li>
+            <a class="group flex items-center gap-2 transition-colors hover:text-[#de0000]" href="#faq">
+              <i class="fa-solid fa-angle-right text-xs text-white/40 group-hover:text-[#de0000]"></i>
+              FAQs
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <!-- Connect -->
+      <!-- Get in Touch -->
       <div>
-        <div class="font-bold">Get in Touch</div>
-        <div class="mt-3 grid gap-2 text-sm text-white/75 font-light">
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="tel:+917840071400">
-            <i class="fa fa-phone"></i> +91 78400 71400
-          </a>
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]" href="tel:+919416140207">
-            <i class="fa fa-phone"></i> +91 94161 40207
-          </a>
-          <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]"
-            href="mailto:info@sypropertyconsultants.in">
-            <i class="fa-regular fa-envelope"></i> info@sypropertyconsultants.in
-          </a>
-          <!-- <a class="flex items-center gap-2 transition-colors hover:text-[#de0000]"
-          href="https://wa.me/917840071400" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp Chat
-        </a> -->
-        </div>
+        <div class="text-sm font-semibold tracking-wide text-white/90">Get in Touch</div>
+        <ul class="mt-4 space-y-3 text-sm font-light text-white/75">
+          <li>
+            <a class="flex items-center gap-3 transition-colors hover:text-[#de0000]" href="tel:+917840071400">
+              <i class="fa fa-phone text-white/60"></i>
+              +91 78400 71400
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 transition-colors hover:text-[#de0000]" href="tel:+919416140207">
+              <i class="fa fa-phone text-white/60"></i>
+              +91 94161 40207
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center gap-3 transition-colors hover:text-[#de0000]"
+              href="mailto:info@sypropertyconsultants.in">
+              <i class="fa-regular fa-envelope text-white/60"></i>
+              info@sypropertyconsultants.in
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <!-- Office Info -->
+      <!-- Office Info (Updated with Social Icons) -->
       <div>
-        <div class="font-bold">Office Info</div>
 
-        <div class="mt-3 text-sm text-white/70 font-light grid gap-4">
-          <div class="flex gap-2">
-            <i class="fa-solid fa-location-dot mt-1"></i>
-            <span>
 
-              DSS-6, HUDA Market, Sector 10<br />
-              Near Kadipur Chowk, Opp. Euro International School<br />
-              Sector 10, Gurugram
 
-            </span>
-          </div>
 
+          <!-- Social Icons -->
           <div>
-            <div class="font-semibold text-white/85 mb-1">Business Hours</div>
-            <div class="flex justify-between gap-4">
-              <span>Mon – Sat</span>
-              <span class="text-white/80">10:00 AM – 7:00 PM</span>
-            </div>
-            <div class="flex justify-between gap-4">
-              <span>Sunday</span>
-              <span class="text-white/80">On Call</span>
+            <div class="mb-3 text-sm font-semibold text-white/85">Follow Us</div>
+            <div class="flex items-center gap-3">
+              <a href="#"
+                class="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80
+                       transition hover:bg-white/10 hover:text-[#de0000]">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="#"
+                class="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80
+                       transition hover:bg-white/10 hover:text-[#de0000]">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="#"
+                class="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80
+                       transition hover:bg-white/10 hover:text-[#de0000]">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
     </div>
+  </div>
 
-    <!-- Bottom bar -->
-    <div class="border-t border-white/15">
-      <div class="max-w-7xl mx-auto px-4 py-4 text-sm text-white/65 font-light
-             flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <span>© <span id="year"></span> S&Y Property Consultants. All Rights Reserved.</span>
+  <!-- Bottom bar -->
+  <div class="border-t border-white/15">
+    <div
+      class="max-w-7xl mx-auto px-4 py-5 text-sm font-light text-white/65
+             flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <span>© <span id="year"></span> S&Y Property Consultants. All Rights Reserved.</span>
 
-        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <a class="transition-colors hover:text-[#de0000]" href="#privacy">Privacy Policy</a>
-          <span class="text-white/25 hidden sm:inline">•</span>
-          <a class="transition-colors hover:text-[#de0000]" href="#terms">Terms</a>
-          <span class="text-white/25 hidden sm:inline">•</span>
-          <a class="transition-colors hover:text-[#de0000]" href="#sitemap">Sitemap</a>
-        </div>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a class="transition-colors hover:text-[#de0000]" href="#privacy">Privacy Policy</a>
+        <span class="hidden sm:inline text-white/25">•</span>
+        <a class="transition-colors hover:text-[#de0000]" href="#terms">Terms</a>
+        <span class="hidden sm:inline text-white/25">•</span>
+        <a class="transition-colors hover:text-[#de0000]" href="#sitemap">Sitemap</a>
       </div>
     </div>
-  </footer>
-
+  </div>
+</footer>
 
 
   <!-- Floating buttons -->

@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Layered BG Builder (Parallax + Layers + Gradient)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Preview section styles (same approach as your final code) */
+#previewSection {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: var(--section-height, 600px);
+  padding-top: var(--section-padding, 80px);
+  padding-bottom: var(--section-padding, 80px);
+}
+
+    .parallax-bg, .secondary-bg, .overlay-image, .gradient-overlay {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+    .parallax-bg { z-index: 0; will-change: transform; }
+    .secondary-bg { z-index: 5; will-change: transform, opacity; }
+    .overlay-image { z-index: 10; will-change: opacity; }
+    .gradient-overlay { z-index: 20; }
+
+    .content { position: relative; z-index: 30; }
+
+    /* Animations */
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+    @keyframes pulseOpacity { 0%,100%{opacity:var(--overlay-opacity)} 50%{opacity:calc(var(--overlay-opacity)*0.7)} }
+    @keyframes gradientShift { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
+    @keyframes bgZoom { 0%{transform:translateY(0) scale(1.10)} 100%{transform:translateY(0) scale(1.18)} }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-bgZoom, .animate-float, .animate-pulse, .animate-grad { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Controls -->
+      <aside class="lg:w-[420px] w-full bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+        <h1 class="text-xl font-semibold">Layered Background Builder</h1>
+        <p class="text-sm text-slate-300 mt-1">Adjust settings → preview updates → export code.</p>
+
+        <div class="mt-4 grid grid-cols-1 gap-4">
+
+          <!-- Section -->
+          <div class="border border-slate-700 rounded-lg p-3">
+            <div class="font-semibold mb-2">Section</div>
+            <label class="block text-xs text-slate-300">Height (min-height)</label>
+            <input id="sectionHeight" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm"
+                   value="600px" placeholder="auto | 600px | 80vh | 100vh" />
+
+            <label class="block text-xs text-slate-300 mt-3">Top/Bottom Padding (equal)</label>
+            <input id="sectionPadding" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm"
+                   value="80px" placeholder="80px" />
+          </div>
+
+          <!-- Primary BG -->
+          <div class="border border-slate-700 rounded-lg p-3">
+            <div class="font-semibold mb-2">Primary BG (Parallax)</div>
+            <label class="block text-xs text-slate-300">BG Image URL / Relative Path</label>
+            <input id="bgImage" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm"
+                   value="https://static.vecteezy.com/system/resources/previews/070/068/863/large_2x/man-reading-papers-at-desk-with-stacks-of-papers-free-photo.jpg" />
+
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <div>
+                <label class="block text-xs text-slate-300">Position X</label>
+                <input id="bgPosX" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="center" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Position Y</label>
+                <input id="bgPosY" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="top" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Size</label>
+                <input id="bgSize" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="cover" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Repeat</label>
+                <select id="bgRepeat" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm">
+                  <option>no-repeat</option>
+                  <option>repeat</option>
+                  <option>repeat-x</option>
+                  <option>repeat-y</option>
+                </select>
+              </div>
+            </div>
+
+            <label class="block text-xs text-slate-300 mt-3">Parallax Speed (0..0.8)</label>
+            <input id="parallaxSpeed" type="number" step="0.05" min="0" max="0.8"
+                   class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="0.30" />
+
+            <div class="flex items-center gap-2 mt-3">
+              <input id="animBgZoom" type="checkbox" class="accent-slate-200" checked />
+              <label for="animBgZoom" class="text-sm">Cinematic zoom</label>
+              <input id="animBgZoomDur" class="ml-auto w-24 bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-sm" value="18s" />
+            </div>
+          </div>
+
+          <!-- Secondary Decorative -->
+          <div class="border border-slate-700 rounded-lg p-3">
+            <div class="font-semibold mb-2">Secondary Decorative Image</div>
+            <label class="block text-xs text-slate-300">Image URL / Path (PNG/SVG)</label>
+            <input id="secondaryImage" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm"
+                   value="assets/images/Transparnt-1.png" />
+
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <div>
+                <label class="block text-xs text-slate-300">Size</label>
+                <input id="secondarySize" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="400px" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Position</label>
+                <input id="secondaryPos" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="right bottom" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Repeat</label>
+                <select id="secondaryRepeat" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm">
+                  <option>no-repeat</option>
+                  <option>repeat</option>
+                  <option>repeat-x</option>
+                  <option>repeat-y</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Opacity (0..1)</label>
+                <input id="secondaryOpacity" type="number" step="0.05" min="0" max="1"
+                       class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="0.85" />
+              </div>
+            </div>
+
+            <label class="block text-xs text-slate-300 mt-3">Blend Mode</label>
+            <select id="secondaryBlend" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm">
+              <option>normal</option>
+              <option>overlay</option>
+              <option>multiply</option>
+              <option>soft-light</option>
+              <option>screen</option>
+            </select>
+
+            <div class="flex items-center gap-2 mt-3">
+              <input id="animSecondaryFloat" type="checkbox" class="accent-slate-200" checked />
+              <label for="animSecondaryFloat" class="text-sm">Float</label>
+              <input id="animSecondaryFloatDur" class="ml-auto w-24 bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-sm" value="6s" />
+            </div>
+          </div>
+
+          <!-- Overlay Pattern -->
+          <div class="border border-slate-700 rounded-lg p-3">
+            <div class="font-semibold mb-2">Overlay Pattern (PNG/SVG)</div>
+            <label class="block text-xs text-slate-300">Image URL / Path</label>
+            <input id="overlayImage" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm"
+                   value="assets/images/partners.png" />
+
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <div>
+                <label class="block text-xs text-slate-300">Size</label>
+                <input id="overlaySize" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="contain" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Position</label>
+                <input id="overlayPos" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="center" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Repeat</label>
+                <select id="overlayRepeat" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm">
+                  <option>no-repeat</option>
+                  <option>repeat</option>
+                  <option>repeat-x</option>
+                  <option>repeat-y</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Opacity (0..1)</label>
+                <input id="overlayOpacity" type="number" step="0.05" min="0" max="1"
+                       class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="0.65" />
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 mt-3">
+              <input id="animOverlayPulse" type="checkbox" class="accent-slate-200" checked />
+              <label for="animOverlayPulse" class="text-sm">Pulse opacity</label>
+              <input id="animOverlayPulseDur" class="ml-auto w-24 bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-sm" value="8s" />
+            </div>
+          </div>
+
+          <!-- Gradient -->
+          <div class="border border-slate-700 rounded-lg p-3">
+            <div class="font-semibold mb-2">Gradient Overlay</div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="col-span-2">
+                <label class="block text-xs text-slate-300">Direction</label>
+                <input id="gradDir" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="to right" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Color 1</label>
+                <input id="gradColor1" type="color" class="w-full mt-1 h-10 bg-slate-950 border border-slate-700 rounded-md" value="#000000" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Alpha 1 (0..1)</label>
+                <input id="gradAlpha1" type="number" step="0.05" min="0" max="1"
+                       class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="0.75" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Color 2</label>
+                <input id="gradColor2" type="color" class="w-full mt-1 h-10 bg-slate-950 border border-slate-700 rounded-md" value="#000000" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300">Alpha 2 (0..1)</label>
+                <input id="gradAlpha2" type="number" step="0.05" min="0" max="1"
+                       class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-md px-3 py-2 text-sm" value="0.25" />
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 mt-3">
+              <input id="animGradient" type="checkbox" class="accent-slate-200" checked />
+              <label for="animGradient" class="text-sm">Animate gradient</label>
+              <input id="animGradientDur" class="ml-auto w-24 bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-sm" value="12s" />
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button id="copyBtn" class="flex-1 bg-emerald-500/90 hover:bg-emerald-500 text-slate-950 font-semibold rounded-lg px-3 py-2">
+              Copy Export Code
+            </button>
+            <button id="resetBtn" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-3 py-2">
+              Reset
+            </button>
+          </div>
+
+          <p class="text-xs text-slate-300">
+            Tip: For local images, use a <b>relative path</b> like <code>assets/images/hero.jpg</code>.
+          </p>
+        </div>
+      </aside>
+
+      <!-- Preview + Export -->
+      <main class="flex-1">
+        <div class="bg-slate-900/40 border border-slate-700 rounded-xl overflow-hidden">
+          <div class="px-4 py-3 flex items-center justify-between border-b border-slate-700">
+            <div class="font-semibold">Preview</div>
+            <div class="text-xs text-slate-300">Scroll page to see parallax</div>
+          </div>
+
+          <!-- Preview section -->
+          <section id="previewSection"
+            style="
+              --section-height: 600px;
+              --section-padding: 80px;
+
+              --bg-image: url('');
+              --bg-pos-x: center;
+              --bg-pos-y: top;
+              --bg-size: cover;
+              --bg-repeat: no-repeat;
+              --parallax-speed: 0.30;
+
+              --secondary-image: url('');
+              --secondary-size: 400px;
+              --secondary-pos: right bottom;
+              --secondary-repeat: no-repeat;
+              --secondary-opacity: 0.85;
+              --secondary-blend: normal;
+
+              --overlay-image: url('');
+              --overlay-size: contain;
+              --overlay-pos: center;
+              --overlay-repeat: no-repeat;
+              --overlay-opacity: 0.65;
+
+              --grad-dir: to right;
+              --grad-1: rgba(0,0,0,0.75);
+              --grad-2: rgba(0,0,0,0.25);
+            ">
+            <div class="parallax-bg"></div>
+            <div class="secondary-bg"></div>
+            <div class="overlay-image"></div>
+            <div class="gradient-overlay"></div>
+
+            <div class="content max-w-7xl mx-auto px-6 text-white">
+              <div class="max-w-2xl">
+                <h2 class="text-4xl font-bold">Section Title</h2>
+                <p class="mt-4 text-lg text-slate-100/90">Section description goes here.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Export -->
+          <div class="border-t border-slate-700">
+            <div class="px-4 py-3 flex items-center justify-between">
+              <div class="font-semibold">Export Code</div>
+              <div id="copiedToast" class="text-xs text-emerald-400 hidden">Copied!</div>
+            </div>
+            <textarea id="export" class="w-full h-[340px] bg-slate-950 text-slate-100 font-mono text-xs p-4 border-t border-slate-700 outline-none"></textarea>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-300 mt-3">
+          Note: This tool exports a single section. If you use multiple sections on one page, change the exported <code>id</code> per section.
+        </div>
+      </main>
+    </div>
+  </div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  const preview = $("previewSection");
+  const exportBox = $("export");
+
+  const fields = [
+    "sectionHeight","sectionPadding",
+    "bgImage","bgPosX","bgPosY","bgSize","bgRepeat","parallaxSpeed",
+    "secondaryImage","secondarySize","secondaryPos","secondaryRepeat","secondaryOpacity","secondaryBlend",
+    "overlayImage","overlaySize","overlayPos","overlayRepeat","overlayOpacity",
+    "gradDir","gradColor1","gradAlpha1","gradColor2","gradAlpha2",
+    "animBgZoom","animBgZoomDur","animSecondaryFloat","animSecondaryFloatDur",
+    "animOverlayPulse","animOverlayPulseDur","animGradient","animGradientDur"
+  ];
+
+  function hexToRgb(hex) {
+    const h = hex.replace("#","");
+    const r = parseInt(h.slice(0,2),16);
+    const g = parseInt(h.slice(2,4),16);
+    const b = parseInt(h.slice(4,6),16);
+    return {r,g,b};
+  }
+
+  function setVar(name, value) {
+    preview.style.setProperty(name, value);
+  }
+
+  function updatePreview() {
+    // Section
+    setVar("--section-height", $("sectionHeight").value.trim() || "auto");
+    setVar("--section-padding", $("sectionPadding").value.trim() || "80px");
+    preview.style.minHeight = "var(--section-height)";
+    preview.style.paddingTop = "var(--section-padding)";
+    preview.style.paddingBottom = "var(--section-padding)";
+
+    // Primary BG
+    const bgUrl = $("bgImage").value.trim();
+    setVar("--bg-image", `url('${bgUrl}')`);
+    setVar("--bg-pos-x", $("bgPosX").value.trim() || "center");
+    setVar("--bg-pos-y", $("bgPosY").value.trim() || "center");
+    setVar("--bg-size", $("bgSize").value.trim() || "cover");
+    setVar("--bg-repeat", $("bgRepeat").value);
+
+    // Secondary
+    const secUrl = $("secondaryImage").value.trim();
+    setVar("--secondary-image", `url('${secUrl}')`);
+    setVar("--secondary-size", $("secondarySize").value.trim() || "400px");
+    setVar("--secondary-pos", $("secondaryPos").value.trim() || "right bottom");
+    setVar("--secondary-repeat", $("secondaryRepeat").value);
+    setVar("--secondary-opacity", String(Math.max(0, Math.min(1, parseFloat($("secondaryOpacity").value || "0.85")))));
+    setVar("--secondary-blend", $("secondaryBlend").value);
+
+    // Overlay
+    const ovUrl = $("overlayImage").value.trim();
+    setVar("--overlay-image", `url('${ovUrl}')`);
+    setVar("--overlay-size", $("overlaySize").value.trim() || "contain");
+    setVar("--overlay-pos", $("overlayPos").value.trim() || "center");
+    setVar("--overlay-repeat", $("overlayRepeat").value);
+    setVar("--overlay-opacity", String(Math.max(0, Math.min(1, parseFloat($("overlayOpacity").value || "0.65")))));
+
+    // Gradient
+    setVar("--grad-dir", $("gradDir").value.trim() || "to right");
+    const c1 = hexToRgb($("gradColor1").value);
+    const a1 = Math.max(0, Math.min(1, parseFloat($("gradAlpha1").value || "0.75")));
+    const c2 = hexToRgb($("gradColor2").value);
+    const a2 = Math.max(0, Math.min(1, parseFloat($("gradAlpha2").value || "0.25")));
+    setVar("--grad-1", `rgba(${c1.r},${c1.g},${c1.b},${a1})`);
+    setVar("--grad-2", `rgba(${c2.r},${c2.g},${c2.b},${a2})`);
+
+    // Apply backgrounds to layers
+    const bg = preview.querySelector(".parallax-bg");
+    bg.style.backgroundImage = bgUrl ? `url("${bgUrl}")` : 'url("https://picsum.photos/1600/900")';
+
+    bg.style.backgroundPosition = "var(--bg-pos-x) var(--bg-pos-y)";
+    bg.style.backgroundSize = "var(--bg-size)";
+    bg.style.backgroundRepeat = "var(--bg-repeat)";
+    bg.style.transform = "translateY(0px) scale(1.1)";
+
+    const sec = preview.querySelector(".secondary-bg");
+    sec.style.backgroundImage = "var(--secondary-image)";
+    sec.style.backgroundSize = "var(--secondary-size)";
+    sec.style.backgroundPosition = "var(--secondary-pos)";
+    sec.style.backgroundRepeat = "var(--secondary-repeat)";
+    sec.style.opacity = "var(--secondary-opacity)";
+    sec.style.mixBlendMode = "var(--secondary-blend)";
+
+    const ov = preview.querySelector(".overlay-image");
+ov.style.backgroundImage = "var(--overlay-image)";
+    ov.style.backgroundSize = "var(--overlay-size)";
+    ov.style.backgroundPosition = "var(--overlay-pos)";
+    ov.style.backgroundRepeat = "var(--overlay-repeat)";
+    ov.style.opacity = "var(--overlay-opacity)";
+
+    const grad = preview.querySelector(".gradient-overlay");
+    grad.style.background = "linear-gradient(var(--grad-dir), var(--grad-1), var(--grad-2))";
+    grad.style.backgroundSize = "200% 200%";
+
+    // Animations toggles
+    bg.classList.toggle("animate-bgZoom", $("animBgZoom").checked);
+    bg.style.animation = $("animBgZoom").checked ? `bgZoom ${$("animBgZoomDur").value || "18s"} ease-in-out infinite alternate` : "none";
+
+    sec.classList.toggle("animate-float", $("animSecondaryFloat").checked);
+    sec.style.animation = $("animSecondaryFloat").checked ? `floatY ${$("animSecondaryFloatDur").value || "6s"} ease-in-out infinite` : "none";
+
+    ov.classList.toggle("animate-pulse", $("animOverlayPulse").checked);
+    ov.style.animation = $("animOverlayPulse").checked ? `pulseOpacity ${$("animOverlayPulseDur").value || "8s"} ease-in-out infinite` : "none";
+
+    grad.classList.toggle("animate-grad", $("animGradient").checked);
+    grad.style.animation = $("animGradient").checked ? `gradientShift ${$("animGradientDur").value || "12s"} ease-in-out infinite alternate` : "none";
+
+    // Export
+    updateExport();
+  }
+
+  // Preview parallax (like your final code)
+  function onScrollParallax() {
+    const speed = Math.max(0, Math.min(0.8, parseFloat($("parallaxSpeed").value || "0.3")));
+    preview.style.setProperty("--parallax-speed", String(speed));
+    const bg = preview.querySelector(".parallax-bg");
+    const rect = preview.getBoundingClientRect();
+    const offset = -rect.top;
+    // Keep scale from animation; just translate. We'll use translate property for better composition.
+    bg.style.translate = `0px ${offset * speed}px`;
+  }
+
+  function updateExport() {
+    const clamp01 = (v) => Math.max(0, Math.min(1, parseFloat(v)));
+
+    const sectionHeight = $("sectionHeight").value.trim() || "auto";
+    const sectionPadding = $("sectionPadding").value.trim() || "80px";
+
+    const bgImage = $("bgImage").value.trim();
+    const bgPosX = $("bgPosX").value.trim() || "center";
+    const bgPosY = $("bgPosY").value.trim() || "top";
+    const bgSize = $("bgSize").value.trim() || "cover";
+    const bgRepeat = $("bgRepeat").value;
+
+    const parallaxSpeed = String(Math.max(0, Math.min(0.8, parseFloat($("parallaxSpeed").value || "0.3"))));
+
+    const secondaryImage = $("secondaryImage").value.trim();
+    const secondarySize = $("secondarySize").value.trim() || "400px";
+    const secondaryPos = $("secondaryPos").value.trim() || "right bottom";
+    const secondaryRepeat = $("secondaryRepeat").value;
+    const secondaryOpacity = String(clamp01($("secondaryOpacity").value || "0.85"));
+    const secondaryBlend = $("secondaryBlend").value;
+
+    const overlayImage = $("overlayImage").value.trim();
+    const overlaySize = $("overlaySize").value.trim() || "contain";
+    const overlayPos = $("overlayPos").value.trim() || "center";
+    const overlayRepeat = $("overlayRepeat").value;
+    const overlayOpacity = String(clamp01($("overlayOpacity").value || "0.65"));
+
+    const c1 = hexToRgb($("gradColor1").value);
+    const a1 = clamp01($("gradAlpha1").value || "0.75");
+    const c2 = hexToRgb($("gradColor2").value);
+    const a2 = clamp01($("gradAlpha2").value || "0.25");
+    const gradDir = $("gradDir").value.trim() || "to right";
+    const grad1 = `rgba(${c1.r},${c1.g},${c1.b},${a1})`;
+    const grad2 = `rgba(${c2.r},${c2.g},${c2.b},${a2})`;
+
+    const animBgZoom = $("animBgZoom").checked;
+    const animBgZoomDur = $("animBgZoomDur").value || "18s";
+    const animSecondaryFloat = $("animSecondaryFloat").checked;
+    const animSecondaryFloatDur = $("animSecondaryFloatDur").value || "6s";
+    const animOverlayPulse = $("animOverlayPulse").checked;
+    const animOverlayPulseDur = $("animOverlayPulseDur").value || "8s";
+    const animGradient = $("animGradient").checked;
+    const animGradientDur = $("animGradientDur").value || "12s";
+
+const SCRIPT_OPEN = "<scr" + "ipt>";
+const SCRIPT_CLOSE = "</scr" + "ipt>";
+
+
+    const exportHtml = `<!-- Layered Parallax Section (exported) -->
+<section
+  id="parallax-section"
+  class="relative w-full overflow-hidden"
+  style="
+    --section-height: ${sectionHeight};
+    --section-padding: ${sectionPadding};
+
+    min-height: var(--section-height);
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+
+    --bg-image: url('${bgImage}');
+    --bg-pos-x: ${bgPosX};
+    --bg-pos-y: ${bgPosY};
+    --bg-size: ${bgSize};
+    --bg-repeat: ${bgRepeat};
+    --parallax-speed: ${parallaxSpeed};
+
+    --secondary-image: url('${secondaryImage}');
+    --secondary-size: ${secondarySize};
+    --secondary-pos: ${secondaryPos};
+    --secondary-repeat: ${secondaryRepeat};
+    --secondary-opacity: ${secondaryOpacity};
+    --secondary-blend: ${secondaryBlend};
+
+    --overlay-image: url('${overlayImage}');
+    --overlay-size: ${overlaySize};
+    --overlay-pos: ${overlayPos};
+    --overlay-repeat: ${overlayRepeat};
+    --overlay-opacity: ${overlayOpacity};
+
+    --grad-dir: ${gradDir};
+    --grad-1: ${grad1};
+    --grad-2: ${grad2};
+  "
+>
+  <div class="parallax-bg absolute inset-0 z-0"></div>
+  <div class="secondary-bg absolute inset-0 pointer-events-none z-5"></div>
+  <div class="overlay-image absolute inset-0 pointer-events-none z-10"></div>
+  <div class="gradient-overlay absolute inset-0 pointer-events-none z-20"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 text-white z-30">
+    <div class="max-w-2xl">
+      <h2 class="text-4xl font-bold mb-6 fade-up">Section Title</h2>
+      <p class="text-lg leading-relaxed fade-up delay-1">Section description goes here.</p>
+    </div>
+  </div>
+
+  <style>
+    .parallax-bg{
+      background-image: var(--bg-image);
+      background-position: var(--bg-pos-x) var(--bg-pos-y);
+      background-size: var(--bg-size);
+      background-repeat: var(--bg-repeat);
+      will-change: transform;
+      transform: translateY(0) scale(1.1);
+      ${animBgZoom ? `animation: bgZoom ${animBgZoomDur} ease-in-out infinite alternate;` : ""}
+    }
+    ${animBgZoom ? `@keyframes bgZoom { 0%{transform:translateY(0) scale(1.10)} 100%{transform:translateY(0) scale(1.18)} }` : ""}
+
+    .secondary-bg{
+      background-image: var(--secondary-image);
+      background-size: var(--secondary-size);
+      background-position: var(--secondary-pos);
+      background-repeat: var(--secondary-repeat);
+      opacity: var(--secondary-opacity);
+      mix-blend-mode: var(--secondary-blend);
+      will-change: transform, opacity;
+      ${animSecondaryFloat ? `animation: floatY ${animSecondaryFloatDur} ease-in-out infinite;` : ""}
+    }
+    ${animSecondaryFloat ? `@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }` : ""}
+
+    .overlay-image{
+      background-image: var(--overlay-image);
+      background-size: var(--overlay-size);
+      background-position: var(--overlay-pos);
+      background-repeat: var(--overlay-repeat);
+      opacity: var(--overlay-opacity);
+      will-change: opacity;
+      ${animOverlayPulse ? `animation: pulseOpacity ${animOverlayPulseDur} ease-in-out infinite;` : ""}
+    }
+    ${animOverlayPulse ? `@keyframes pulseOpacity { 0%,100%{opacity:var(--overlay-opacity)} 50%{opacity:calc(var(--overlay-opacity)*0.7)} }` : ""}
+
+    .gradient-overlay{
+      background: linear-gradient(var(--grad-dir), var(--grad-1), var(--grad-2));
+      ${animGradient ? "background-size: 200% 200%;" : ""}
+      ${animGradient ? `animation: gradientShift ${animGradientDur} ease-in-out infinite alternate;` : ""}
+    }
+    ${animGradient ? `@keyframes gradientShift { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }` : ""}
+
+    .fade-up{ opacity:0; transform:translateY(25px); transition:all .8s ease; }
+    .fade-up.show{ opacity:1; transform:translateY(0); }
+    .delay-1{ transition-delay:.2s; }
+
+    @media (prefers-reduced-motion: reduce){
+      .parallax-bg,.secondary-bg,.overlay-image,.gradient-overlay{ animation:none !important; }
+      .fade-up{ opacity:1; transform:none; transition:none; }
+    }
+  </style>
+
+  ${SCRIPT_OPEN}
+
+    document.addEventListener("DOMContentLoaded", function(){
+      const section = document.getElementById("parallax-section");
+      const bg = section.querySelector(".parallax-bg");
+      const speed = parseFloat(getComputedStyle(section).getPropertyValue("--parallax-speed")) || 0.3;
+
+      window.addEventListener("scroll", function(){
+        const rect = section.getBoundingClientRect();
+        const offset = -rect.top;
+        bg.style.translate = \`0px \${offset * speed}px\`;
+      }, { passive: true });
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("show"));
+      }, { threshold: 0.3 });
+
+      section.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+    });
+${SCRIPT_CLOSE}
+</section>`;
+
+    exportBox.value = exportHtml;
+  }
+
+  // Wire inputs
+  fields.forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener("input", updatePreview);
+    el.addEventListener("change", updatePreview);
+  });
+
+  // Copy
+  $("copyBtn").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(exportBox.value);
+      $("copiedToast").classList.remove("hidden");
+      setTimeout(() => $("copiedToast").classList.add("hidden"), 900);
+    } catch {
+      exportBox.select();
+      document.execCommand("copy");
+      $("copiedToast").classList.remove("hidden");
+      setTimeout(() => $("copiedToast").classList.add("hidden"), 900);
+    }
+  });
+
+  // Reset (simple)
+  $("resetBtn").addEventListener("click", () => location.reload());
+
+  // Live parallax
+  window.addEventListener("scroll", onScrollParallax, { passive: true });
+
+  // Init
+  updatePreview();
+  onScrollParallax();
+<\/script>
+</body>
+</html>
